@@ -1,0 +1,6 @@
+cold-sage
+--text: #ebefec;
+--background: #0c0e0c;
+--primary: #adbcaf;
+--secondary: #4c4757;
+--accent: #937b92;

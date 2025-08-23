@@ -1,0 +1,12 @@
+{
+    "label" : "reboot",
+    "action" : "~/.config/scripts/power.sh reboot",
+    "text" : "Restart",
+    "keybind" : "r"
+}
+{
+    "label" : "shutdown",
+    "action" : "~/.config/scripts/power.sh shutdown",
+    "text" : "Power Off",
+    "keybind" : "s"
+}

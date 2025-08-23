@@ -1,0 +1,116 @@
+{
+  "position": "top",
+  "modules-left": ["hyprland/workspaces", "hyprland/window"],
+  "modules-center": ["clock"],
+  "modules-right": ["pulseaudio#output", "pulseaudio#input", "bluetooth", "network", 
+  "custom/exit"],
+  "spacing": 10,
+
+  "hyprland/window":{
+    "max-length": 50,
+    "format": "{initialTitle}",
+    "rewrite": {
+        "(.*) — Mozilla Firefox": "",
+        "Mozilla Firefox": "",
+        "(.*) - Code (.*)": "󰨞",
+        "(.*) - Discord": "",
+        "Spotify": "",
+        "kitty": ""
+    },
+    "separate-outputs": true
+  },
+
+  "clock": {
+    "format": "{:%H:%M  }",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "calendar":{
+      "mode": "month",
+      "mode-mon-col": 4,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months":     "<span color='#ebefec'><b>{}</b></span>",
+        "days":       "<span color='#adbcaf'><b>{}</b></span>",
+        "weeks":      "<span color='#74272f'><b> </b></span>",
+        "weekdays":   "<span color='#4c4757'><b>{}</b></span>",
+        "today":      "<span color='#937b92'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions":  {
+      "on-click": "mode",
+      "on-click-right": "shift_reset",
+      "on-scroll-up": "tz_up",
+      "on-scroll-down": "tz_down",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+      }
+  },
+
+  "bluetooth": {
+    "format": "{status} ",
+    "format-disabled": "off ", // an empty format will hide the module
+    "format-connected": " {device_alias}",
+    "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+    // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+    "on-click": "blueman-manager",
+    "on-click-right": "rfkill toggle bluetooth"
+  },
+  
+  "network": {
+    "interface": "eno1",
+    "format": "{ifname}",
+    "format-wifi": "{essid} ({signalStrength}%) ",
+    "format-ethernet": "{ifname} ",
+    "format-disconnected": "",
+    "tooltip-format": "{ifname}",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+    "tooltip-format-ethernet": "{ifname} ",
+    "tooltip-format-disconnected": "Disconnected",
+    "max-length": 50
+  },
+
+  "pulseaudio#output": {
+    "format": "{volume}% {icon}",
+    "format-bluetooth": "{volume}% {icon}",
+    "format-muted": "Mute ",
+    "format-icons": {
+      "default": ["", "", " "],
+      "alsa_output.pci-0000_00_1f.3.analog-stereo": "",
+      "alsa_output.pci-0000_00_1f.3.analog-stereo-muted": "",
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "phone-muted": "",
+      "portable": "",
+      "car": ""
+    },
+    "scroll-step": 1,
+    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-click-right": "pavucontrol"
+  },
+
+  "pulseaudio#input": {
+    "format-source": "{volume}% ",
+    "format-source-muted": "OFF ",
+    "format": "{format_source}",
+    "scroll-step": 1,
+    "smooth-scrolling-threshold": 1,
+    "max-volume": 100,
+    "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+    "on-click-right": "pavucontrol",
+    "on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +1%",
+    "on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -1%",
+  },
+
+  "custom/exit": {
+    "format": "   ",
+    "on-click": "~/.config/scripts/logout.sh",
+    "on-click-right": "hyprlock",
+    "tooltip-format": "Left: Power menu\nRight: Lock screen"
+  }
+}
