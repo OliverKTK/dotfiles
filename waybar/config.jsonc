@@ -90,7 +90,7 @@
       "car": ""
     },
     "scroll-step": 1,
-    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "on-click": "~/.config/scripts/toggle-audio.sh",
     "on-click-right": "pavucontrol"
   },
 
